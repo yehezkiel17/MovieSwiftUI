@@ -10,6 +10,11 @@ import Foundation
 
 enum Constant {
 	
+	// MARK: - Base
 	static let baseUrl = "https://api.themovie.org"
 	static let apiKey = "API_KEY"
+	
+	// MARK: - Path
+	static let nowPlaying = "/movie/now_playing"
+	static let upcoming = "/movie/upcoming"
 }
