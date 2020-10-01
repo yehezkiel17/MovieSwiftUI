@@ -9,5 +9,7 @@
 import Foundation
 
 protocol MovieServices {
-	func getMovies(url: String, completion: @escaping (Result<Response, Error>) -> ())
+	func getMovies(path: Path,
+				   successCompletion: @escaping (Response) -> Void,
+				   errorCompletion: @escaping (Error?) -> Void)
 }
