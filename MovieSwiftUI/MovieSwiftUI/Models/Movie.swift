@@ -9,5 +9,18 @@
 import Foundation
 
 struct Movie: Codable {
-	
+	let id: Int
+	let title: String
+	let overview: String
+	let releaseDate: String
+	let popularity: Double
+	let voteCount: Int
+	let voteAverage: Double
+	let originalLanguage: String
+	let originalTitle: String
+	let video: Bool
+	let adult: Bool
+	let genreIds: [Int]
+	let posterPath: String?
+	let backdropPath: String?
 }
