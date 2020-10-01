@@ -20,6 +20,7 @@ class MovieSession: MovieServices {
 	func getMovies(path: Path,
 				   successCompletion: @escaping (Response) -> (),
 				   errorCompletion: @escaping (Error?) -> ()) {
+		
 		var urlComponent = URLComponents()
 		urlComponent.scheme = Constant.scheme
 		urlComponent.host = Constant.host
@@ -39,12 +40,12 @@ class MovieSession: MovieServices {
 			}
 			
 			if let data = data, let response = try? JSONDecoder().decode(Response.self, from: data) {
-					DispatchQueue.main.async {
-						successCompletion(response)
-					}
-					
-					return
+				DispatchQueue.main.async {
+					successCompletion(response)
 				}
+				
+				return
+			}
 		}.resume()
 	}
 }
