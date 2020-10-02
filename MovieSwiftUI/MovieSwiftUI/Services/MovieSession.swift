@@ -33,18 +33,21 @@ class MovieSession: MovieServices {
 			return
 		}
 		
-		urlSession.dataTask(with: url) { (data, response, error) in
-			guard error == nil else {
+		urlSession.dataTask(with: url) { [weak self] (data, response, error) in
+			guard let self = self, error == nil else {
 				errorCompletion(error)
 				return
 			}
 			
-			if let data = data, let response = try? JSONDecoder().decode(Response.self, from: data) {
-				DispatchQueue.main.async {
-					successCompletion(response)
+			if let data = data {
+				do {
+					let response = try self.decoder.decode(Response.self, from: data)
+					DispatchQueue.main.async {
+						successCompletion(response)
+					}
+				} catch {
+					print("ERROR")
 				}
-				
-				return
 			}
 		}.resume()
 	}
