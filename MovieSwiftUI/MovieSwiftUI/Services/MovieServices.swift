@@ -10,6 +10,6 @@ import Foundation
 
 protocol MovieServices {
 	func getMovies(path: Path,
-				   successCompletion: @escaping (Response) -> Void,
-				   errorCompletion: @escaping (Error?) -> Void)
+				   successCompletion: ((Response) -> Void)?,
+				   errorCompletion: ((Error?) -> Void)?)
 }

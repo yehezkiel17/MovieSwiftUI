@@ -18,8 +18,8 @@ class MovieSession: MovieServices {
 	private init() {}
 	
 	func getMovies(path: Path,
-				   successCompletion: @escaping (Response) -> (),
-				   errorCompletion: @escaping (Error?) -> ()) {
+				   successCompletion: ((Response) -> ())? = nil,
+				   errorCompletion: ((Error?) -> ())? = nil) {
 		
 		var urlComponent = URLComponents()
 		urlComponent.scheme = Constant.scheme
@@ -35,20 +35,36 @@ class MovieSession: MovieServices {
 		
 		urlSession.dataTask(with: url) { [weak self] (data, response, error) in
 			guard let self = self, error == nil else {
-				errorCompletion(error)
+				errorCompletion?(error)
 				return
 			}
 			
 			if let data = data {
 				do {
-					let response = try self.decoder.decode(Response.self, from: data)
+					let tmdbResponse = try self.decoder.decode(Response.self, from: data)
+					
+					self.cachingResponse(path: path, result: tmdbResponse.results)
+					
 					DispatchQueue.main.async {
-						successCompletion(response)
+						successCompletion?(tmdbResponse)
 					}
 				} catch {
 					print("ERROR")
 				}
 			}
 		}.resume()
+	}
+	
+	private func cachingResponse(path: Path, result: [Movie]) {
+		var key: MovieCache.MovieKey
+		
+		switch path {
+		case .nowPlaying:
+			key = MovieCache.MovieKey.nowPlaying
+		case .upcoming:
+			key = MovieCache.MovieKey.upcoming
+		}
+		
+		MovieCache.shared.save(value: result, key: key.rawValue)
 	}
 }
