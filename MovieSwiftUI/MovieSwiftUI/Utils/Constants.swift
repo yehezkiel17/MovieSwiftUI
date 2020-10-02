@@ -10,11 +10,11 @@ import Foundation
 
 enum Constant {
 	static let scheme = "https"
-	static let host = "api.themovie.org"
+	static let host = "api.themoviedb.org"
 	static let apiKey = "API_KEY"
 }
 
 enum Path: String, CaseIterable {
-	case nowPlaying = "/movie/now_playing"
-	case upcoming = "/movie/upcoming"
+	case nowPlaying = "/3/movie/now_playing"
+	case upcoming = "/3/movie/upcoming"
 }
