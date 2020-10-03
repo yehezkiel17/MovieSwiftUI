@@ -14,7 +14,8 @@ protocol MovieServices {
 				   successCompletion: ((Response) -> Void)?,
 				   errorCompletion: ((Error?) -> Void)?)
 	
-	func getImage(path: String,
-				   successCompletion: ((UIImage) -> Void)?,
-				   errorCompletion: ((Error?) -> Void)?)
+	func getImage(id: String,
+				  path: String,
+				  successCompletion: ((UIImage) -> Void)?,
+				  errorCompletion: ((Error?) -> Void)?)
 }
