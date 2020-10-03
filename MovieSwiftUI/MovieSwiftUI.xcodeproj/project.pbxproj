@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B3271FD2528EF0900060FFB /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3271FC2528EF0900060FFB /* ViewModel.swift */; };
 		6B3271FF2528EFBE00060FFB /* ViewBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3271FE2528EFBE00060FFB /* ViewBinding.swift */; };
+		6B3272102528F5C100060FFB /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B32720F2528F5C100060FFB /* ImageCache.swift */; };
 		6BAB08532522630D005EC751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB08522522630D005EC751 /* AppDelegate.swift */; };
 		6BAB08552522630D005EC751 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB08542522630D005EC751 /* SceneDelegate.swift */; };
 		6BAB08572522630D005EC751 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB08562522630D005EC751 /* ContentView.swift */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		6B3271FC2528EF0900060FFB /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6B3271FE2528EFBE00060FFB /* ViewBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBinding.swift; sourceTree = "<group>"; };
+		6B32720F2528F5C100060FFB /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6BAB084F2522630D005EC751 /* MovieSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BAB08522522630D005EC751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BAB08542522630D005EC751 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				6BBA8CA52527AC9700CE40DD /* Cache.swift */,
 				6BBA8CA72527ACD400CE40DD /* MovieCache.swift */,
+				6B32720F2528F5C100060FFB /* ImageCache.swift */,
 			);
 			path = Caches;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			files = (
 				6BAB089025250910005EC751 /* Movie.swift in Sources */,
 				6BAB08532522630D005EC751 /* AppDelegate.swift in Sources */,
+				6B3272102528F5C100060FFB /* ImageCache.swift in Sources */,
 				6BAB088E252506E5005EC751 /* Response.swift in Sources */,
 				6BBA8CA62527AC9700CE40DD /* Cache.swift in Sources */,
 				6BC46EF625265148007C8B3A /* MovieSession.swift in Sources */,
