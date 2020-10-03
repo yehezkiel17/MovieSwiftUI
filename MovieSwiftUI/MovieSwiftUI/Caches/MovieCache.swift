@@ -18,8 +18,6 @@ class MovieCache: ObservableObject {
 		case upcoming = "upcoming"
 	}
 	
-	var keys: [String] = []
-	
 	static let shared = MovieCache()
 	
 	private let userDefaults = UserDefaults.standard
@@ -34,7 +32,7 @@ extension MovieCache: Cache {
 		}
 	}
 	
-	func load(key: Key) -> [Movie]? {
+	func load(key: Key) -> Value? {
 		var movies: [Movie]?
 		let decoder = JSONDecoder.tmdbJsonDecoder
 		
