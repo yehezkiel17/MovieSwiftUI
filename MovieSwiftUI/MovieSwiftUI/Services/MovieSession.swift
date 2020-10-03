@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieSession: MovieServices {
 	
@@ -55,6 +56,38 @@ class MovieSession: MovieServices {
 		}.resume()
 	}
 	
+	func getImage(id: String,
+				  path: String,
+				  successCompletion: ((UIImage) -> ())? = nil,
+				  errorCompletion: ((Error?) -> ())? = nil) {
+		var urlComponent = URLComponents()
+		urlComponent.scheme = Constant.scheme
+		urlComponent.host = Constant.imageHost
+		urlComponent.path = "\(Constant.imagePath)\(path)"
+		
+		guard let url = urlComponent.url else {
+			return
+		}
+		
+		urlSession.dataTask(with: url) { [weak self] (data, response, error) in
+			guard let self = self, error == nil else {
+				errorCompletion?(error)
+				return
+			}
+			
+			if let data = data {
+				DispatchQueue.global().async {
+					guard let image = UIImage(data: data) else {
+						return
+					}
+					
+					self.cachingImage(key: id, result: image)
+					successCompletion?(image)
+				}
+			}
+		}.resume()
+	}
+	
 	private func cachingResponse(path: Path, result: [Movie]) {
 		var key: MovieCache.MovieKey
 		
@@ -66,5 +99,9 @@ class MovieSession: MovieServices {
 		}
 		
 		MovieCache.shared.save(value: result, key: key.rawValue)
+	}
+	
+	private func cachingImage(key: String, result: UIImage) {
+		ImageCache.shared.save(value: result, key: key)
 	}
 }
