@@ -11,6 +11,10 @@ import Foundation
 enum Constant {
 	static let scheme = "https"
 	static let host = "api.themoviedb.org"
+	
+	static let imageHost = "image.tmdb.org"
+	static let imagePath = "/t/p/original/"
+	
 	static let apiKey = "API_KEY"
 }
 
