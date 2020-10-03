@@ -18,6 +18,8 @@ class ImageCache: ObservableObject {
 	
 	private let userDefaults = UserDefaults.standard
 	
+	@Published var image: Value?
+	
 	private init() {}
 }
 
@@ -25,6 +27,10 @@ extension ImageCache: Cache {
 	func save(value: Value, key: Key) {
 		let encodedString = value.pngData()?.base64EncodedString()
 		userDefaults.set(encodedString, forKey: key)
+		
+		DispatchQueue.main.async { [weak self] in
+			self?.image = value
+		}
 	}
 	
 	func load(key: Key) -> Value? {
