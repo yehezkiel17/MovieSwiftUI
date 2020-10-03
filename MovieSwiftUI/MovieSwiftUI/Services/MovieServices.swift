@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MovieServices {
 	func getMovies(path: Path,
 				   successCompletion: ((Response) -> Void)?,
 				   errorCompletion: ((Error?) -> Void)?)
 	
-	func getMovies(path: String,
+	func getImage(path: String,
 				   successCompletion: ((UIImage) -> Void)?,
 				   errorCompletion: ((Error?) -> Void)?)
 }
