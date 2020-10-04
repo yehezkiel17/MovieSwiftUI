@@ -34,11 +34,11 @@ struct LandscapeCardView: View {
 					Image(uiImage: image ?? UIImage())
 						.resizable()
 						.aspectRatio(contentMode: .fill)
-						.frame(width: 320, height: 180, alignment: .top)
+						.frame(width: 256, height: 144, alignment: .top)
 				}
 			}
 			.aspectRatio(contentMode: .fill)
-			.frame(width: 320, height: 180, alignment: .top)
+			.frame(width: 256, height: 144, alignment: .top)
 			.clipped()
 			.cornerRadius(16)
 			.shadow(radius: 4)
@@ -56,6 +56,6 @@ struct LandscapeCardView: View {
 
 struct LandscapeCardView_Previews: PreviewProvider {
 	static var previews: some View {
-		LandscapeCardView(movie: Movie.dummy)
+		LandscapeCardView(movie: Movie.dummyMovie)
 	}
 }
