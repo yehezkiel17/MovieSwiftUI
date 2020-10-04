@@ -23,7 +23,7 @@ struct CardCollectionView: View {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(alignment: .top, spacing: 0) {
 					ForEach(self.movies, id: \.self) { movie in
-						LandscapeCardView(movie: movie)
+						CardView(movie: movie)
 							.frame(width: 256, height: 180)
 							.padding(.leading, 16)
 							.padding(.trailing, 16)
