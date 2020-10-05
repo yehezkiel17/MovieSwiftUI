@@ -15,9 +15,13 @@ struct HomeView: View {
     var body: some View {
 		NavigationView {
 			List {
-				CardCollectionView(viewModel: nowPlayingCollectionViewModel)
+				Group {
+					CardCollectionView(viewModel: nowPlayingCollectionViewModel)
+				}
 				
-				CardCollectionView(viewModel: upcomingCollectionViewModel)
+				Group {
+					CardCollectionView(viewModel: upcomingCollectionViewModel)
+				}
 			}
 		}
     }
