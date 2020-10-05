@@ -66,13 +66,13 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 	
 	func getLeadingPadding(movie: Movie) -> CGFloat {
 		let firstId = self.movies.first?.id ?? 0
-		let padding: CGFloat = movie.id == firstId ? 16 : 8
+		let padding: CGFloat = movie.id == firstId ? 0 : 8
 		return padding
 	}
 	
 	func getTrailingPadding(movie: Movie) -> CGFloat {
 		let lastId = self.movies.last?.id ?? 0
-		let padding: CGFloat = movie.id == lastId ? 16 : 8
+		let padding: CGFloat = movie.id == lastId ? 0 : 8
 		return padding
 	}
 }
