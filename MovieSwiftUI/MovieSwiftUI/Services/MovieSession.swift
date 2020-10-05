@@ -97,6 +97,10 @@ class MovieSession: MovieServices {
 		switch path {
 		case .nowPlaying:
 			key = MovieCache.MovieKey.nowPlaying
+		case .popular:
+			key = MovieCache.MovieKey.popular
+		case .topRated:
+			key = MovieCache.MovieKey.topRated
 		case .upcoming:
 			key = MovieCache.MovieKey.upcoming
 		}

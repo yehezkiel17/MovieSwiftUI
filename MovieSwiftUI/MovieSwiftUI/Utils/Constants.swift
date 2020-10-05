@@ -20,10 +20,14 @@ enum Constant {
 
 enum Path: String, CaseIterable {
 	case nowPlaying = "/3/movie/now_playing"
+	case popular = "/3/movie/popular"
+	case topRated = "/3/movie/top_rated"
 	case upcoming = "/3/movie/upcoming"
 }
 
 enum SectionTitle: String, CaseIterable {
 	case nowPlaying = "Now Playing"
+	case popular = "Popular"
+	case topRated = "TopRated"
 	case upcoming = "Upcoming"
 }

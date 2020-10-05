@@ -15,6 +15,8 @@ class MovieCache {
 	
 	enum MovieKey: String, CaseIterable {
 		case nowPlaying = "now-playing"
+		case popular = "popular"
+		case topRated = "top-rated"
 		case upcoming = "upcoming"
 	}
 	

@@ -29,6 +29,10 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 		switch title {
 		case .nowPlaying:
 			path = .nowPlaying
+		case .popular:
+			path = .popular
+		case .topRated:
+			path = .topRated
 		case .upcoming:
 			path = .upcoming
 		}
