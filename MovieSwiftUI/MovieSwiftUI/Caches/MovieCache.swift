@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MovieCache: ObservableObject {
+class MovieCache {
 	
 	typealias Key = String
 	typealias Value = [Movie]

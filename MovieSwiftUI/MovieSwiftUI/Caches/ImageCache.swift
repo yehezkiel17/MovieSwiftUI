@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ImageCache: ObservableObject {
+class ImageCache {
 	
 	typealias Key = String
 	typealias Value = UIImage
@@ -18,18 +18,15 @@ class ImageCache: ObservableObject {
 	
 	private let userDefaults = UserDefaults.standard
 	
-	@Published var image: Value?
-	
 	private init() {}
 }
 
 extension ImageCache: Cache {
 	func save(value: Value, key: Key) {
-		let encodedString = value.pngData()?.base64EncodedString()
-		userDefaults.set(encodedString, forKey: key)
 		
-		DispatchQueue.main.async { [weak self] in
-			self?.image = value
+		DispatchQueue.global().async { [weak self] in
+			let encodedString = value.pngData()?.base64EncodedString()
+			self?.userDefaults.set(encodedString, forKey: key)
 		}
 	}
 	
