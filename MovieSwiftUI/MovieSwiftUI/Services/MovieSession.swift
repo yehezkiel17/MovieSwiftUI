@@ -81,7 +81,7 @@ class MovieSession: MovieServices {
 				}
 				
 				DispatchQueue.global().async {
-//					self.cachingImage(key: id, result: image)
+					self.cachingImage(key: id, result: image)
 				}
 				
 				DispatchQueue.main.async {
