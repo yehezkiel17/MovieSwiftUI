@@ -9,28 +9,25 @@
 import SwiftUI
 
 struct HomeView: View {
-	@ObservedObject var nowPlayingCollectionViewModel: CardCollectionViewModel
-	@ObservedObject var popularCollectionViewModel: CardCollectionViewModel
-	@ObservedObject var topRatedCollectionViewModel: CardCollectionViewModel
-	@ObservedObject var upcomingCollectionViewModel: CardCollectionViewModel
+	@ObservedObject var viewModel: HomeViewModel
 	
     var body: some View {
 		NavigationView {
 			List {
 				Group {
-					CardCollectionView(viewModel: nowPlayingCollectionViewModel)
+					CardCollectionView(viewModel: viewModel.nowPlayingCollectionViewModel)
 				}
 				
 				Group {
-					CardCollectionView(viewModel: popularCollectionViewModel)
+					CardCollectionView(viewModel: viewModel.popularCollectionViewModel)
 				}
 				
 				Group {
-					CardCollectionView(viewModel: topRatedCollectionViewModel)
+					CardCollectionView(viewModel: viewModel.topRatedCollectionViewModel)
 				}
 				
 				Group {
-					CardCollectionView(viewModel: upcomingCollectionViewModel)
+					CardCollectionView(viewModel: viewModel.upcomingCollectionViewModel)
 				}
 			}
 			.navigationBarTitle(Constant.homeTitle)
@@ -43,36 +40,13 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-		let nowPlayingCollectionViewModel = CardCollectionViewModel(
-			title: SectionTitle.upcoming,
-			cardOrientationType: .portrait
-		)
+		let viewModel = HomeViewModel()
 		
-		let popularCollectionViewModel = CardCollectionViewModel(
-			title: SectionTitle.popular,
-			cardOrientationType: .landscape
-		)
+		viewModel.nowPlayingCollectionViewModel.movies = Movie.dummyMovies
+		viewModel.popularCollectionViewModel.movies = Movie.dummyMovies
+		viewModel.topRatedCollectionViewModel.movies = Movie.dummyMovies
+		viewModel.upcomingCollectionViewModel.movies = Movie.dummyMovies
 		
-		let topRatedCollectionViewModel = CardCollectionViewModel(
-			title: SectionTitle.topRated,
-			cardOrientationType: .landscape
-		)
-		
-		let upcomingCollectionViewModel = CardCollectionViewModel(
-			title: SectionTitle.upcoming,
-			cardOrientationType: .landscape
-		)
-		
-		nowPlayingCollectionViewModel.movies = Movie.dummyMovies
-		popularCollectionViewModel.movies = Movie.dummyMovies
-		topRatedCollectionViewModel.movies = Movie.dummyMovies
-		upcomingCollectionViewModel.movies = Movie.dummyMovies
-		
-		return HomeView(
-			nowPlayingCollectionViewModel: nowPlayingCollectionViewModel,
-			popularCollectionViewModel: popularCollectionViewModel,
-			topRatedCollectionViewModel: topRatedCollectionViewModel,
-			upcomingCollectionViewModel: upcomingCollectionViewModel
-		)
+		return HomeView(viewModel: viewModel)
     }
 }
