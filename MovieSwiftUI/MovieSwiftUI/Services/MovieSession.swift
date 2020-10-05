@@ -76,12 +76,15 @@ class MovieSession: MovieServices {
 			}
 			
 			if let data = data {
+				guard let image = UIImage(data: data) else {
+					return
+				}
+				
 				DispatchQueue.global().async {
-					guard let image = UIImage(data: data) else {
-						return
-					}
-					
-					self.cachingImage(key: id, result: image)
+//					self.cachingImage(key: id, result: image)
+				}
+				
+				DispatchQueue.main.async {
 					successCompletion?(image)
 				}
 			}
