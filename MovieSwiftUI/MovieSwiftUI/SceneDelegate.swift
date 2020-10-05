@@ -24,6 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			cardOrientationType: .portrait
 		)
 		
+		let popularCollectionViewModel = CardCollectionViewModel(
+			title: SectionTitle.popular,
+			cardOrientationType: .landscape
+		)
+		
+		let topRatedCollectionViewModel = CardCollectionViewModel(
+			title: SectionTitle.topRated,
+			cardOrientationType: .landscape
+		)
+		
 		let upcomingCollectionViewModel = CardCollectionViewModel(
 			title: SectionTitle.upcoming,
 			cardOrientationType: .landscape
@@ -31,6 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		
 		let contentView = HomeView(
 			nowPlayingCollectionViewModel: nowPlayingCollectionViewModel,
+			popularCollectionViewModel: popularCollectionViewModel,
+			topRatedCollectionViewModel: topRatedCollectionViewModel,
 			upcomingCollectionViewModel: upcomingCollectionViewModel
 		)
 		
