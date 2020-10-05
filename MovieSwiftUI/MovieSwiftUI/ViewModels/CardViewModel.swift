@@ -19,12 +19,26 @@ class CardViewModel: ViewModel, ObservableObject {
 	let movie: Movie
 	let cardOrientationType: CardOrientationType
 	let movieSession = MovieSession.shared
+	let imageCache = ImageCache.shared
 	
 	@Published var image: UIImage?
 	
 	init(movie: Movie, cardOrientationType: CardOrientationType) {
 		self.movie = movie
 		self.cardOrientationType = cardOrientationType
+		
+		getImage()
+	}
+	
+	func getImage() {
+		guard let image = imageCache.load(key: String(movie.id)) else {
+			requestImage()
+			return
+		}
+		
+		DispatchQueue.main.async { [weak self] in
+			self?.image = image
+		}
 	}
 	
 	func requestImage() {

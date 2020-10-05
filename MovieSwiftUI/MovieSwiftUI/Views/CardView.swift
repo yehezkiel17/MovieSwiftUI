@@ -26,11 +26,6 @@ struct CardView: View {
 			
 			Text(viewModel.movie.title)
 		}
-		.onAppear(perform: {
-			DispatchQueue.global().async {
-				self.viewModel.requestImage()
-			}
-		})
 	}
 	
 	var imageView: some View {

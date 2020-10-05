@@ -21,6 +21,8 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 		 cardOrientationType: CardOrientationType) {
 		self.title = title
 		self.cardOrientationType = cardOrientationType
+		
+		requestMovie()
 	}
 	
 	func requestMovie() {

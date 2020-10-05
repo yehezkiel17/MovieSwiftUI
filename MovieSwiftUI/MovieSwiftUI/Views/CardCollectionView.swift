@@ -20,11 +20,6 @@ struct CardCollectionView: View {
 			
 			movieList
 		}
-		.onAppear(perform: {
-			DispatchQueue.global().async {
-				self.viewModel.requestMovie()
-			}
-		})
     }
 	
 	var movieList: some View {
