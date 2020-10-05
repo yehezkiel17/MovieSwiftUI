@@ -22,22 +22,7 @@ struct CardView: View {
 
 	var body: some View {
 		VStack(alignment: .leading) {
-			ZStack {
-				Rectangle()
-					.fill(Color.gray.opacity(0.4))
-				
-				if image != nil {
-					Image(uiImage: image ?? UIImage())
-						.resizable()
-						.aspectRatio(contentMode: .fill)
-						.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
-				}
-			}
-			.aspectRatio(contentMode: .fill)
-			.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
-			.clipped()
-			.cornerRadius(16)
-			.shadow(radius: 4)
+			imageView
 			
 			Text(viewModel.movie.title)
 		}
@@ -46,6 +31,25 @@ struct CardView: View {
 				self.viewModel.requestImage()
 			}
 		})
+	}
+	
+	var imageView: some View {
+		ZStack {
+			Rectangle()
+				.fill(Color.gray.opacity(0.4))
+			
+			if image != nil {
+				Image(uiImage: image ?? UIImage())
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
+			}
+		}
+		.aspectRatio(contentMode: .fill)
+		.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
+		.clipped()
+		.cornerRadius(16)
+		.shadow(radius: 4)
 	}
 }
 

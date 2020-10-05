@@ -13,21 +13,12 @@ struct CardCollectionView: View {
 	@ObservedObject var viewModel: CardCollectionViewModel
 	
     var body: some View {
-		VStack(alignment: .leading, spacing: 8) {
+		VStack(alignment: .leading, spacing: 16) {
 			Text(viewModel.title.rawValue)
 				.font(.title)
 				.fontWeight(.bold)
 			
-			ScrollView(.horizontal, showsIndicators: false) {
-				HStack(alignment: .top, spacing: 0) {
-					ForEach(viewModel.movies, id: \.self) { movie in
-						CardView(viewModel: self.createCardViewModel(movie: movie))
-							.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight())
-							.padding(.leading, self.viewModel.getLeadingPadding(movie: movie))
-							.padding(.trailing, self.viewModel.getTrailingPadding(movie: movie))
-					}
-				}
-			}
+			movieList
 		}
 		.onAppear(perform: {
 			DispatchQueue.global().async {
@@ -36,6 +27,26 @@ struct CardCollectionView: View {
 		})
     }
 	
+	var movieList: some View {
+		ScrollView(.horizontal, showsIndicators: false) {
+			
+			HStack(alignment: .top, spacing: 0) {
+				
+				ForEach(viewModel.movies, id: \.self) { movie in
+					
+					NavigationLink(destination: MovieView(viewModel: MovieViewModel(movie: movie)), label: {
+						
+						CardView(viewModel: self.createCardViewModel(movie: movie))
+							.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight())
+							.padding(.leading, self.viewModel.getLeadingPadding(movie: movie))
+							.padding(.trailing, self.viewModel.getTrailingPadding(movie: movie))
+					})
+				}
+				.buttonStyle(PlainButtonStyle())
+			}
+		}
+	}
+
 	func createCardViewModel(movie: Movie) -> CardViewModel {
 		return CardViewModel(movie: movie, cardOrientationType: viewModel.cardOrientationType)
 	}
