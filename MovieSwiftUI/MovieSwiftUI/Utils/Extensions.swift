@@ -26,4 +26,11 @@ extension DateFormatter {
 		
 		return formatter
 	}
+	
+	static var tmdbYearFormatter: DateFormatter {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyy"
+		
+		return formatter
+	}
 }
