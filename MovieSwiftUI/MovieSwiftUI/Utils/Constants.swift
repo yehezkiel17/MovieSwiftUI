@@ -13,15 +13,17 @@ enum Constant {
 	static let host = "api.themoviedb.org"
 	
 	static let imageHost = "image.tmdb.org"
-	static let imagePath = "/t/p/original/"
+	static let imagePath = "/t/p/w500/"
 	
 	static let apiKey = "API_KEY"
-	
-	static let nowPlaying = "Now Playing"
-	static let upcoming = "Upcoming"
 }
 
 enum Path: String, CaseIterable {
 	case nowPlaying = "/3/movie/now_playing"
 	case upcoming = "/3/movie/upcoming"
+}
+
+enum SectionTitle: String, CaseIterable {
+	case nowPlaying = "Now Playing"
+	case upcoming = "Upcoming"
 }
