@@ -17,7 +17,6 @@ struct CardCollectionView: View {
 			Text(viewModel.title.rawValue)
 				.font(.title)
 				.fontWeight(.bold)
-				.padding(.horizontal)
 			
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(alignment: .top, spacing: 0) {
