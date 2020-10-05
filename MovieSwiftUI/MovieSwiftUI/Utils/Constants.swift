@@ -16,6 +16,8 @@ enum Constant {
 	static let imagePath = "/t/p/w500/"
 	
 	static let apiKey = "API_KEY"
+	
+	static let homeTitle = "Movies"
 }
 
 enum Path: String, CaseIterable {
