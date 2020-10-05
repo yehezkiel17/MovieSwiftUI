@@ -46,7 +46,7 @@ struct CardCollectionView_Previews: PreviewProvider {
     static var previews: some View {
 		let viewModel = CardCollectionViewModel(
 			title: Constant.upcoming,
-			cardOrientationType: .portrait
+			cardOrientationType: .landscape
 		)
 		
 		viewModel.movies = Movie.dummyMovies

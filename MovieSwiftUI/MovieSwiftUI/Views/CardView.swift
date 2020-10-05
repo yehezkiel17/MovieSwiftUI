@@ -51,7 +51,7 @@ struct CardView: View {
 
 struct LandscapeCardView_Previews: PreviewProvider {
 	static var previews: some View {
-		let viewModel = CardViewModel(movie: Movie.dummyMovie, cardOrientationType: .portrait)
+		let viewModel = CardViewModel(movie: Movie.dummyMovie, cardOrientationType: .landscape)
 		return CardView(viewModel: viewModel)
 	}
 }

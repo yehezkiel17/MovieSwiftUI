@@ -35,18 +35,18 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 	
 	func getWidth() -> CGFloat {
 		switch cardOrientationType {
-		case .portrait:
-			return 256
 		case .landscape:
+			return 256
+		case .portrait:
 			return 144
 		}
 	}
 	
 	func getHeight() -> CGFloat {
 		switch cardOrientationType {
-		case .portrait:
-			return 176
 		case .landscape:
+			return 176
+		case .portrait:
 			return 288
 		}
 	}

@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Create the SwiftUI view that provides the window contents.
 		let viewModel = CardCollectionViewModel(
 			title: Constant.upcoming,
-			cardOrientationType: .portrait
+			cardOrientationType: .landscape
 		)
 		
 		let contentView = CardCollectionView(viewModel: viewModel)
