@@ -25,8 +25,6 @@ class CardViewModel: ViewModel, ObservableObject {
 	init(movie: Movie, cardOrientationType: CardOrientationType) {
 		self.movie = movie
 		self.cardOrientationType = cardOrientationType
-		
-		requestImage()
 	}
 	
 	func requestImage() {
