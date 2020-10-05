@@ -10,32 +10,47 @@ import SwiftUI
 
 struct CardCollectionView: View {
 	
-	let title: String
-	let movies: [Movie]
+	@ObservedObject var viewModel: CardCollectionViewModel
 	
     var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
-			Text(title)
+			Text(viewModel.title)
 				.font(.title)
 				.fontWeight(.bold)
 				.padding(.horizontal)
 			
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(alignment: .top, spacing: 0) {
-					ForEach(self.movies, id: \.self) { movie in
-						CardView(movie: movie)
-							.frame(width: 256, height: 180)
+					ForEach(viewModel.movies, id: \.self) { movie in
+						CardView(viewModel: self.createCardViewModel(movie: movie))
+							.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight())
 							.padding(.leading, 16)
 							.padding(.trailing, 16)
 					}
 				}
 			}
 		}
+		.onAppear(perform: {
+			DispatchQueue.global().async {
+				self.viewModel.requestMovie()
+			}
+		})
     }
+	
+	func createCardViewModel(movie: Movie) -> CardViewModel {
+		return CardViewModel(movie: movie, cardOrientationType: viewModel.cardOrientationType)
+	}
 }
 
 struct CardCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-		CardCollectionView(title: Constant.upcoming, movies: Movie.dummyMovies)
+		let viewModel = CardCollectionViewModel(
+			title: Constant.upcoming,
+			cardOrientationType: .portrait
+		)
+		
+		viewModel.movies = Movie.dummyMovies
+		
+		return CardCollectionView(viewModel: viewModel)
     }
 }

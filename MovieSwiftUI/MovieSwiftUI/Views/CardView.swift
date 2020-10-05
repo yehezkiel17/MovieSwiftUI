@@ -10,20 +10,16 @@ import SwiftUI
 
 struct CardView: View {
 	
-	let movie: Movie
+	@ObservedObject var viewModel: CardViewModel
 	
 	var image: UIImage? {
-		guard let image = imageCache.load(key: String(movie.id)) else {
+		guard let image = viewModel.image else {
 			return nil
 		}
 		
 		return image
 	}
-	
-	var movieSession = MovieSession.shared
-	
-	@ObservedObject var imageCache = ImageCache.shared
-	
+
 	var body: some View {
 		VStack(alignment: .leading) {
 			ZStack {
@@ -34,28 +30,28 @@ struct CardView: View {
 					Image(uiImage: image ?? UIImage())
 						.resizable()
 						.aspectRatio(contentMode: .fill)
-						.frame(width: 256, height: 144, alignment: .top)
+						.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
 				}
 			}
 			.aspectRatio(contentMode: .fill)
-			.frame(width: 256, height: 144, alignment: .top)
+			.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
 			.clipped()
 			.cornerRadius(16)
 			.shadow(radius: 4)
 			
-			Text(movie.title)
+			Text(viewModel.movie.title)
 		}
 		.onAppear(perform: {
-			self.movieSession.getImage(
-				id: String(self.movie.id),
-				path: self.movie.posterPath ?? ""
-			)
+			DispatchQueue.global().async {
+				self.viewModel.requestImage()
+			}
 		})
 	}
 }
 
 struct LandscapeCardView_Previews: PreviewProvider {
 	static var previews: some View {
-		CardView(movie: Movie.dummyMovie)
+		let viewModel = CardViewModel(movie: Movie.dummyMovie, cardOrientationType: .portrait)
+		return CardView(viewModel: viewModel)
 	}
 }
