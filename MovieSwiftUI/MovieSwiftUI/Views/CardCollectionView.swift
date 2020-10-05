@@ -24,8 +24,8 @@ struct CardCollectionView: View {
 					ForEach(viewModel.movies, id: \.self) { movie in
 						CardView(viewModel: self.createCardViewModel(movie: movie))
 							.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight())
-							.padding(.leading, 16)
-							.padding(.trailing, 16)
+							.padding(.leading, self.viewModel.getLeadingPadding(movie: movie))
+							.padding(.trailing, self.viewModel.getTrailingPadding(movie: movie))
 					}
 				}
 			}
@@ -46,7 +46,7 @@ struct CardCollectionView_Previews: PreviewProvider {
     static var previews: some View {
 		let viewModel = CardCollectionViewModel(
 			title: Constant.upcoming,
-			cardOrientationType: .landscape
+			cardOrientationType: .portrait
 		)
 		
 		viewModel.movies = Movie.dummyMovies

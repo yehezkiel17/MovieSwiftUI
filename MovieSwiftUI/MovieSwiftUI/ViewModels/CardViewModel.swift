@@ -48,7 +48,7 @@ class CardViewModel: ViewModel, ObservableObject {
 		case .landscape:
 			return 256
 		case .portrait:
-			return 144
+			return 160
 		}
 	}
 	
@@ -57,7 +57,7 @@ class CardViewModel: ViewModel, ObservableObject {
 		case .landscape:
 			return 144
 		case .portrait:
-			return 256
+			return 240
 		}
 	}
 }

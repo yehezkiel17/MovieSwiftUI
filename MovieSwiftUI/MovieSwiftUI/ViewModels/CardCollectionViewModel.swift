@@ -38,7 +38,7 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 		case .landscape:
 			return 256
 		case .portrait:
-			return 144
+			return 160
 		}
 	}
 	
@@ -47,7 +47,19 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 		case .landscape:
 			return 176
 		case .portrait:
-			return 288
+			return 280
 		}
+	}
+	
+	func getLeadingPadding(movie: Movie) -> CGFloat {
+		let firstId = self.movies.first?.id ?? 0
+		let padding: CGFloat = movie.id == firstId ? 16 : 8
+		return padding
+	}
+	
+	func getTrailingPadding(movie: Movie) -> CGFloat {
+		let lastId = self.movies.last?.id ?? 0
+		let padding: CGFloat = movie.id == lastId ? 16 : 8
+		return padding
 	}
 }
