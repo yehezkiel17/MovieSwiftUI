@@ -11,20 +11,29 @@ import SwiftUI
 
 class CardCollectionViewModel: ViewModel, ObservableObject {
 	
-	let title: String
+	let title: SectionTitle
 	let cardOrientationType: CardOrientationType
 	let movieSession = MovieSession.shared
 	
 	@Published var movies: [Movie] = [Movie.dummyMovie]
 	
-	init(title: String,
+	init(title: SectionTitle,
 		 cardOrientationType: CardOrientationType) {
 		self.title = title
 		self.cardOrientationType = cardOrientationType
 	}
 	
 	func requestMovie() {
-		movieSession.getMovies(path: .upcoming, successCompletion: { [weak self] response in
+		var path: Path
+		
+		switch title {
+		case .nowPlaying:
+			path = .nowPlaying
+		case .upcoming:
+			path = .upcoming
+		}
+		
+		movieSession.getMovies(path: path, successCompletion: { [weak self] response in
 			guard let self = self else {
 				return
 			}

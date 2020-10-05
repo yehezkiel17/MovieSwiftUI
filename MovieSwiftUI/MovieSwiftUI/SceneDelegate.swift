@@ -19,13 +19,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
 		// Create the SwiftUI view that provides the window contents.
-		let viewModel = CardCollectionViewModel(
-			title: Constant.upcoming,
+		let nowPlayingCollectionViewModel = CardCollectionViewModel(
+			title: SectionTitle.nowPlaying,
+			cardOrientationType: .portrait
+		)
+		
+		let upcomingCollectionViewModel = CardCollectionViewModel(
+			title: SectionTitle.upcoming,
 			cardOrientationType: .landscape
 		)
 		
-		let contentView = CardCollectionView(viewModel: viewModel)
-
+		let contentView = HomeView(
+			nowPlayingCollectionViewModel: nowPlayingCollectionViewModel,
+			upcomingCollectionViewModel: upcomingCollectionViewModel
+		)
+		
 		// Use a UIHostingController as window root view controller.
 		if let windowScene = scene as? UIWindowScene {
 		    let window = UIWindow(windowScene: windowScene)

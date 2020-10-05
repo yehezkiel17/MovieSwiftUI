@@ -14,7 +14,7 @@ struct CardCollectionView: View {
 	
     var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
-			Text(viewModel.title)
+			Text(viewModel.title.rawValue)
 				.font(.title)
 				.fontWeight(.bold)
 				.padding(.horizontal)
@@ -45,7 +45,7 @@ struct CardCollectionView: View {
 struct CardCollectionView_Previews: PreviewProvider {
     static var previews: some View {
 		let viewModel = CardCollectionViewModel(
-			title: Constant.upcoming,
+			title: SectionTitle.upcoming,
 			cardOrientationType: .portrait
 		)
 		
