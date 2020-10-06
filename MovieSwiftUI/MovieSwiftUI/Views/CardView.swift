@@ -19,7 +19,7 @@ struct CardView: View {
 		
 		return image
 	}
-
+	
 	var body: some View {
 		VStack(alignment: .leading) {
 			imageView
@@ -37,14 +37,18 @@ struct CardView: View {
 				Image(uiImage: image ?? UIImage())
 					.resizable()
 					.aspectRatio(contentMode: .fill)
-					.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
+					.frame(width: self.viewModel.getWidth(),
+						   height: self.viewModel.getHeight(),
+						   alignment: .top)
 			}
 		}
 		.aspectRatio(contentMode: .fill)
-		.frame(width: self.viewModel.getWidth(), height: self.viewModel.getHeight(), alignment: .top)
-		.clipped()
-		.cornerRadius(16)
-		.shadow(radius: 4)
+		.frame(width: self.viewModel.getWidth(),
+			   height: self.viewModel.getHeight(),
+			   alignment: .top)
+			.clipped()
+			.cornerRadius(16)
+			.shadow(radius: 4)
 	}
 }
 

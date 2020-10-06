@@ -33,6 +33,7 @@ struct MovieView: View {
 		}
 		.onAppear(perform: {
 			self.viewModel.requestImage()
+			self.viewModel.requestVideo()
 		})
 	}
 	
@@ -46,7 +47,8 @@ struct MovieView: View {
 					.resizable()
 					.aspectRatio(contentMode: .fill)
 					.frame(width: viewModel.getImageWidth(),
-						   height: viewModel.getImageHeight())
+						   height: viewModel.getImageHeight(),
+						   alignment: .top)
 			}
 		}
 		.aspectRatio(contentMode: .fill)

@@ -10,9 +10,10 @@ import Foundation
 import SwiftUI
 
 class MovieViewModel: ViewModel, ObservableObject {
-	let movie: Movie
+	var movie: Movie
 	let movieSession = MovieSession.shared
 	
+	@Published var videoResponse: MovieVideoResponse?
 	@Published var image: UIImage?
 	
 	init(movie: Movie) {
@@ -20,7 +21,14 @@ class MovieViewModel: ViewModel, ObservableObject {
 	}
 	
 	func requestVideo() {
-		
+		movieSession.getVideo(movie: &movie, successCompletion: { [weak self] videoResponse in
+			guard let self = self else {
+				return
+			}
+			
+			self.movie.videoResponse = videoResponse
+			self.videoResponse = videoResponse
+		})
 	}
 	
 	func requestImage() {

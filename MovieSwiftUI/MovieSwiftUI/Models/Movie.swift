@@ -23,7 +23,7 @@ struct Movie: Codable, Hashable {
 	let genreIds: [Int]
 	let posterPath: String?
 	let backdropPath: String?
-	let videoResponse: MovieVideoResponse?
+	var videoResponse: MovieVideoResponse?
 }
 
 extension Movie {
