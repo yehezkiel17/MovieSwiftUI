@@ -26,7 +26,7 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 	}
 	
 	func requestMovie() {
-		var path: Path
+		var path: CategoryPath
 		
 		switch title {
 		case .nowPlaying:

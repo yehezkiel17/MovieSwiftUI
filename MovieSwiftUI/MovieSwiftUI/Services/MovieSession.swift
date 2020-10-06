@@ -18,7 +18,7 @@ class MovieSession: MovieServices {
 	
 	private init() {}
 	
-	func getMovies(path: Path,
+	func getMovies(path: CategoryPath,
 				   successCompletion: ((Response) -> ())? = nil,
 				   errorCompletion: ((Error?) -> ())? = nil) {
 		
@@ -26,6 +26,44 @@ class MovieSession: MovieServices {
 		urlComponent.scheme = Constant.scheme
 		urlComponent.host = Constant.host
 		urlComponent.path = path.rawValue
+		
+		let apiKeyQuery = URLQueryItem(name: "api_key", value: Constant.apiKey)
+		urlComponent.queryItems = [apiKeyQuery]
+		
+		guard let url = urlComponent.url else {
+			return
+		}
+		
+		urlSession.dataTask(with: url) { [weak self] (data, response, error) in
+			guard let self = self, error == nil else {
+				errorCompletion?(error)
+				return
+			}
+			
+			if let data = data {
+				do {
+					let tmdbResponse = try self.decoder.decode(Response.self, from: data)
+					
+					self.cachingResponse(path: path, result: tmdbResponse.results)
+					
+					DispatchQueue.main.async {
+						successCompletion?(tmdbResponse)
+					}
+				} catch {
+					print("ERROR")
+				}
+			}
+		}.resume()
+	}
+	
+	func getDetail(movieId: String,
+				   successCompletion: ((Response) -> ())? = nil,
+				   errorCompletion: ((Error?) -> ())? = nil) {
+		
+		var urlComponent = URLComponents()
+		urlComponent.scheme = Constant.scheme
+		urlComponent.host = Constant.host
+		urlComponent.path = Constant.detailPath + movieId
 		
 		let apiKeyQuery = URLQueryItem(name: "api_key", value: Constant.apiKey)
 		urlComponent.queryItems = [apiKeyQuery]
@@ -91,7 +129,7 @@ class MovieSession: MovieServices {
 		}.resume()
 	}
 	
-	private func cachingResponse(path: Path, result: [Movie]) {
+	private func cachingResponse(path: CategoryPath, result: [Movie]) {
 		var key: MovieCache.MovieKey
 		
 		switch path {

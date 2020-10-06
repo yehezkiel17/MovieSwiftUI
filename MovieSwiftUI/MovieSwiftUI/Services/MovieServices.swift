@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 
 protocol MovieServices {
-	func getMovies(path: Path,
+	func getMovies(path: CategoryPath,
+				   successCompletion: ((Response) -> Void)?,
+				   errorCompletion: ((Error?) -> Void)?)
+	
+	func getDetail(movieId: String,
 				   successCompletion: ((Response) -> Void)?,
 				   errorCompletion: ((Error?) -> Void)?)
 	

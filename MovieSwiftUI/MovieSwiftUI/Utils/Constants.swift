@@ -15,12 +15,14 @@ enum Constant {
 	static let imageHost = "image.tmdb.org"
 	static let imagePath = "/t/p/w500/"
 	
+	static let detailPath = "/3/movie/"
+	
 	static let apiKey = "API_KEY"
 	
 	static let homeTitle = "Movies"
 }
 
-enum Path: String, CaseIterable {
+enum CategoryPath: String, CaseIterable {
 	case nowPlaying = "/3/movie/now_playing"
 	case popular = "/3/movie/popular"
 	case topRated = "/3/movie/top_rated"
