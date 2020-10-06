@@ -16,18 +16,26 @@ class MovieViewModel: ViewModel, ObservableObject {
 	@Published var videoResponse: MovieVideoResponse?
 	@Published var image: UIImage?
 	
+	@ObservedObject var similarCollectionViewModel: CardCollectionViewModel
+	
 	init(movie: Movie) {
 		self.movie = movie
+		
+		similarCollectionViewModel = CardCollectionViewModel(
+			title: SectionTitle.similar,
+			cardOrientationType: .landscape,
+			movieId: String(movie.id)
+		)
 	}
 	
 	func requestVideo() {
-		movieSession.getVideo(movie: &movie, successCompletion: { [weak self] videoResponse in
+		movieSession.getVideo(movie: &movie, successCompletion: { [weak self] response in
 			guard let self = self else {
 				return
 			}
 			
-			self.movie.videoResponse = videoResponse
-			self.videoResponse = videoResponse
+			self.movie.videoResponse = response
+			self.videoResponse = response
 		})
 	}
 	

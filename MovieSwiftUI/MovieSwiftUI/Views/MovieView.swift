@@ -21,16 +21,15 @@ struct MovieView: View {
 	}
 	
 	var body: some View {
-		NavigationView {
-			VStack(spacing: 16) {
-				posterView
-				detailLabel
-				overviewLabel
-				Divider()
-				Spacer()
-			}
-			.navigationBarTitle(viewModel.movie.title)
+		List {
+			posterView
+			detailLabel
+			overviewLabel
+			Divider()
+			similarList
+			Spacer()
 		}
+		.navigationBarTitle(viewModel.movie.title)
 		.onAppear(perform: {
 			self.viewModel.requestImage()
 			self.viewModel.requestVideo()
@@ -72,6 +71,12 @@ struct MovieView: View {
 		Text(viewModel.movie.overview)
 			.font(.body)
 			.padding(16)
+	}
+	
+	var similarList: some View {
+		Group {
+			CardCollectionView(viewModel: viewModel.similarCollectionViewModel)
+		}
 	}
 }
 

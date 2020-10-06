@@ -17,6 +17,7 @@ enum Constant {
 	
 	static let path = "/3/movie/"
 	static let videoPath = "/videos"
+	static let similarPath = "/similar"
 	
 	static let apiKey = "API_KEY"
 	
@@ -35,4 +36,5 @@ enum SectionTitle: String, CaseIterable {
 	case popular = "Popular"
 	case topRated = "TopRated"
 	case upcoming = "Upcoming"
+	case similar = "Similar Movies"
 }

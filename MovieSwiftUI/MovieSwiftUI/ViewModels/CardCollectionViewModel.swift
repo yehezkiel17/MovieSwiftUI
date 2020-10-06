@@ -18,15 +18,16 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 	@Published var movies: [Movie] = [Movie.dummyMovie]
 	
 	init(title: SectionTitle,
-		 cardOrientationType: CardOrientationType) {
+		 cardOrientationType: CardOrientationType,
+		 movieId: String? = nil) {
 		self.title = title
 		self.cardOrientationType = cardOrientationType
 		
-		requestMovie()
+		requestMovie(id: movieId)
 	}
 	
-	func requestMovie() {
-		var path: CategoryPath
+	func requestMovie(id: String? = nil) {
+		var path: CategoryPath?
 		
 		switch title {
 		case .nowPlaying:
@@ -37,9 +38,30 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 			path = .topRated
 		case .upcoming:
 			path = .upcoming
+		case .similar:
+			guard let id = id else {
+				return
+			}
+			
+			requestSimilarMovies(id: id)
+			break
 		}
 		
-		movieSession.getMovies(path: path, successCompletion: { [weak self] response in
+		guard let categoryPath = path else {
+			return
+		}
+		
+		movieSession.getMovies(path: categoryPath, successCompletion: { [weak self] response in
+			guard let self = self else {
+				return
+			}
+			
+			self.movies = response.results
+		})
+	}
+	
+	func requestSimilarMovies(id: String) {
+		movieSession.getSimilarMovies(id: id, successCompletion: { [weak self] response in
 			guard let self = self else {
 				return
 			}

@@ -14,6 +14,10 @@ protocol MovieServices {
 				   successCompletion: ((MovieResponse) -> Void)?,
 				   errorCompletion: ((Error?) -> Void)?)
 	
+	func getSimilarMovies(id: String,
+						  successCompletion: ((MovieResponse) -> Void)?,
+						  errorCompletion: ((Error?) -> Void)?)
+	
 	func getVideo(movie: inout Movie,
 				  successCompletion: ((MovieVideoResponse) -> Void)?,
 				  errorCompletion: ((Error?) -> Void)?)

@@ -56,6 +56,42 @@ class MovieSession: MovieServices {
 		}.resume()
 	}
 	
+	func getSimilarMovies(id: String,
+						  successCompletion: ((MovieResponse) -> ())? = nil,
+						  errorCompletion: ((Error?) -> ())? = nil) {
+		
+		var urlComponent = URLComponents()
+		urlComponent.scheme = Constant.scheme
+		urlComponent.host = Constant.host
+		urlComponent.path = Constant.path + id + Constant.similarPath
+		
+		let apiKeyQuery = URLQueryItem(name: "api_key", value: Constant.apiKey)
+		urlComponent.queryItems = [apiKeyQuery]
+		
+		guard let url = urlComponent.url else {
+			return
+		}
+		
+		urlSession.dataTask(with: url) { [weak self] (data, response, error) in
+			guard let self = self, error == nil else {
+				errorCompletion?(error)
+				return
+			}
+			
+			if let data = data {
+				do {
+					let decodedResponse = try self.decoder.decode(MovieResponse.self, from: data)
+					
+					DispatchQueue.main.async {
+						successCompletion?(decodedResponse)
+					}
+				} catch {
+					print("ERROR")
+				}
+			}
+		}.resume()
+	}
+	
 	func getVideo(movie: inout Movie,
 				  successCompletion: ((MovieVideoResponse) -> ())? = nil,
 				  errorCompletion: ((Error?) -> ())? = nil) {
@@ -99,7 +135,7 @@ class MovieSession: MovieServices {
 		var urlComponent = URLComponents()
 		urlComponent.scheme = Constant.scheme
 		urlComponent.host = Constant.imageHost
-		urlComponent.path = "\(Constant.imagePath)\(path)"
+		urlComponent.path = Constant.imagePath + path
 		
 		guard let url = urlComponent.url else {
 			return
