@@ -26,7 +26,9 @@ struct MovieView: View {
 			detailLabel
 			overviewLabel
 			Divider()
-			similarList
+			if viewModel.similarCollectionViewModel.movies.count > 0 {
+				similarList
+			}
 			Spacer()
 		}
 		.navigationBarTitle(viewModel.movie.title)
@@ -48,20 +50,28 @@ struct MovieView: View {
 					.frame(width: viewModel.getImageWidth(),
 						   height: viewModel.getImageHeight(),
 						   alignment: .top)
+				
+				Button(action: {
+					print("Edit button was tapped")
+				}) {
+					Image("ico-play")
+						.renderingMode(.original)
+				}
 			}
 		}
 		.aspectRatio(contentMode: .fill)
 		.frame(width: viewModel.getImageWidth(),
 			   height: viewModel.getImageHeight(),
 			   alignment: .top)
-			.clipped()
+		.clipped()
+		.padding(.leading, -20)
+		.buttonStyle(PlainButtonStyle())
 	}
 	
 	var detailLabel: some View {
 		HStack {
 			Text(viewModel.getMovieAtrributes())
 				.font(.caption)
-				.padding(.leading, 16)
 			
 			Spacer()
 		}
@@ -70,7 +80,6 @@ struct MovieView: View {
 	var overviewLabel: some View {
 		Text(viewModel.movie.overview)
 			.font(.body)
-			.padding(16)
 	}
 	
 	var similarList: some View {

@@ -44,7 +44,7 @@ class MovieSession: MovieServices {
 				do {
 					let decodedResponse = try self.decoder.decode(MovieResponse.self, from: data)
 					
-					self.cachingResponse(path: path, result: decodedResponse.results)
+//					self.cachingResponse(path: path, result: decodedResponse.results)
 					
 					DispatchQueue.main.async {
 						successCompletion?(decodedResponse)
@@ -152,9 +152,9 @@ class MovieSession: MovieServices {
 					return
 				}
 				
-				DispatchQueue.global().async {
-					self.cachingImage(key: id, result: image)
-				}
+//				DispatchQueue.global().async {
+//					self.cachingImage(key: id, result: image)
+//				}
 				
 				DispatchQueue.main.async {
 					successCompletion?(image)
