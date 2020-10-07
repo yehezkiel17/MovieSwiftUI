@@ -19,7 +19,7 @@ class MovieSession: MovieServices {
 	private init() {}
 	
 	func getMovies(path: CategoryPath,
-				   successCompletion: ((Response) -> ())? = nil,
+				   successCompletion: ((MovieResponse) -> ())? = nil,
 				   errorCompletion: ((Error?) -> ())? = nil) {
 		
 		var urlComponent = URLComponents()
@@ -42,12 +42,12 @@ class MovieSession: MovieServices {
 			
 			if let data = data {
 				do {
-					let tmdbResponse = try self.decoder.decode(Response.self, from: data)
+					let decodedResponse = try self.decoder.decode(MovieResponse.self, from: data)
 					
-					self.cachingResponse(path: path, result: tmdbResponse.results)
+					self.cachingResponse(path: path, result: decodedResponse.results)
 					
 					DispatchQueue.main.async {
-						successCompletion?(tmdbResponse)
+						successCompletion?(decodedResponse)
 					}
 				} catch {
 					print("ERROR")
@@ -56,14 +56,14 @@ class MovieSession: MovieServices {
 		}.resume()
 	}
 	
-	func getDetail(movieId: String,
-				   successCompletion: ((Response) -> ())? = nil,
-				   errorCompletion: ((Error?) -> ())? = nil) {
+	func getVideo(movie: inout Movie,
+				  successCompletion: ((MovieVideoResponse) -> ())? = nil,
+				  errorCompletion: ((Error?) -> ())? = nil) {
 		
 		var urlComponent = URLComponents()
 		urlComponent.scheme = Constant.scheme
 		urlComponent.host = Constant.host
-		urlComponent.path = Constant.detailPath + movieId
+		urlComponent.path = Constant.path + String(movie.id) + Constant.videoPath
 		
 		let apiKeyQuery = URLQueryItem(name: "api_key", value: Constant.apiKey)
 		urlComponent.queryItems = [apiKeyQuery]
@@ -80,12 +80,10 @@ class MovieSession: MovieServices {
 			
 			if let data = data {
 				do {
-					let tmdbResponse = try self.decoder.decode(Response.self, from: data)
-					
-					self.cachingResponse(path: path, result: tmdbResponse.results)
+					let decodedResponse = try self.decoder.decode(MovieVideoResponse.self, from: data)
 					
 					DispatchQueue.main.async {
-						successCompletion?(tmdbResponse)
+						successCompletion?(decodedResponse)
 					}
 				} catch {
 					print("ERROR")

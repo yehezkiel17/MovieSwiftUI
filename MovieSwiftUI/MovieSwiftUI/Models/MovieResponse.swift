@@ -1,5 +1,5 @@
 //
-//  GeneralResponse.swift
+//  MovieResponse.swift
 //  MovieSwiftUI
 //
 //  Created by Yehezkiel Litbagay on 01/10/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Response: Codable {
+struct MovieResponse: Codable {
 	let page: Int
 	let totalResults: Int
 	let totalPages: Int

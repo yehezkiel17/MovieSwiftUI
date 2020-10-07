@@ -19,6 +19,10 @@ class MovieViewModel: ViewModel, ObservableObject {
 		self.movie = movie
 	}
 	
+	func requestVideo() {
+		
+	}
+	
 	func requestImage() {
 		guard let path = movie.posterPath else {
 			return

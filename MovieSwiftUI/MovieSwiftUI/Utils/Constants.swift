@@ -15,7 +15,8 @@ enum Constant {
 	static let imageHost = "image.tmdb.org"
 	static let imagePath = "/t/p/w500/"
 	
-	static let detailPath = "/3/movie/"
+	static let path = "/3/movie/"
+	static let videoPath = "/videos"
 	
 	static let apiKey = "API_KEY"
 	

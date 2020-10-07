@@ -11,12 +11,12 @@ import UIKit
 
 protocol MovieServices {
 	func getMovies(path: CategoryPath,
-				   successCompletion: ((Response) -> Void)?,
+				   successCompletion: ((MovieResponse) -> Void)?,
 				   errorCompletion: ((Error?) -> Void)?)
 	
-	func getDetail(movieId: String,
-				   successCompletion: ((Response) -> Void)?,
-				   errorCompletion: ((Error?) -> Void)?)
+	func getVideo(movie: inout Movie,
+				  successCompletion: ((MovieVideoResponse) -> Void)?,
+				  errorCompletion: ((Error?) -> Void)?)
 	
 	func getImage(id: String,
 				  path: String,
