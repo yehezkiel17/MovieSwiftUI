@@ -10,7 +10,10 @@ import Foundation
 import SwiftUI
 
 struct MovieView: View {
+	
 	@ObservedObject var viewModel: MovieViewModel
+	
+	@State var showingVideoPlayer = false
 	
 	var image: UIImage? {
 		guard let image = viewModel.image else {
@@ -42,7 +45,7 @@ struct MovieView: View {
 		ZStack {
 			Rectangle()
 				.fill(Color.gray.opacity(0.4))
-			
+
 			if image != nil {
 				Image(uiImage: image ?? UIImage())
 					.resizable()
@@ -50,12 +53,16 @@ struct MovieView: View {
 					.frame(width: viewModel.getImageWidth(),
 						   height: viewModel.getImageHeight(),
 						   alignment: .top)
-				
+
 				Button(action: {
-					print("Edit button was tapped")
+					self.showingVideoPlayer.toggle()
 				}) {
 					Image("ico-play")
 						.renderingMode(.original)
+				}
+
+				if showingVideoPlayer && viewModel.url != nil {
+					VideoView(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4")!, previewLength: 15)
 				}
 			}
 		}

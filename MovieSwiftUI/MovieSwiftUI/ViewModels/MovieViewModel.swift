@@ -15,6 +15,7 @@ class MovieViewModel: ViewModel, ObservableObject {
 	
 	@Published var videoResponse: MovieVideoResponse?
 	@Published var image: UIImage?
+	@Published var url: URL?
 	
 	@ObservedObject var similarCollectionViewModel: CardCollectionViewModel
 	
@@ -36,6 +37,7 @@ class MovieViewModel: ViewModel, ObservableObject {
 			
 			self.movie.videoResponse = response
 			self.videoResponse = response
+			self.createURL()
 		})
 	}
 	
@@ -79,5 +81,45 @@ class MovieViewModel: ViewModel, ObservableObject {
 	
 	func getImageHeight() -> CGFloat {
 		return 9/16 * getImageWidth()
+	}
+	
+	func createPlayerViewModel() -> VideoViewModel {
+		let youtube = Constant.youtube
+		
+		videoResponse?.results.sort { result1, result2 in
+			result1.size > result2.size
+		}
+		
+		let trailer = videoResponse?.results.first(where: { video in
+			return video.site.lowercased() == youtube
+		})
+		
+		return VideoViewModel(key: trailer?.key ?? "")
+	}
+	
+	func createURL() {
+		let youtube = Constant.youtube
+		
+		videoResponse?.results.sort { result1, result2 in
+			result1.size > result2.size
+		}
+		
+		let trailer = videoResponse?.results.first(where: { video in
+			return video.site.lowercased() == youtube
+		})
+		
+		var urlComponent = URLComponents()
+		urlComponent.scheme = Constant.scheme
+		urlComponent.host = Constant.youtubeHost
+		urlComponent.path = Constant.youtubePath
+		
+		let keyQuery = URLQueryItem(name: "v", value: trailer?.key)
+		urlComponent.queryItems = [keyQuery]
+		
+		guard let url = urlComponent.url else {
+			return
+		}
+		
+		self.url = url
 	}
 }
