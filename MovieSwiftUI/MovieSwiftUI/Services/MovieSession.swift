@@ -132,6 +132,7 @@ class MovieSession: MovieServices {
 				  path: String,
 				  successCompletion: ((UIImage) -> ())? = nil,
 				  errorCompletion: ((Error?) -> ())? = nil) {
+		
 		var urlComponent = URLComponents()
 		urlComponent.scheme = Constant.scheme
 		urlComponent.host = Constant.imageHost

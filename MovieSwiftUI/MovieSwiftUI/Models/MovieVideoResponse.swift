@@ -10,5 +10,5 @@ import Foundation
 
 struct MovieVideoResponse: Codable, Hashable {
 	let id: Int
-	let results: [MovieVideo]
+	var results: [MovieVideo]
 }
