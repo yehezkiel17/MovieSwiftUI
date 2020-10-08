@@ -11,6 +11,7 @@ import Foundation
 enum Constant {
 	static let scheme = "https"
 	static let host = "api.themoviedb.org"
+	static let youtubeHost = "youtube.com"
 	
 	static let imageHost = "image.tmdb.org"
 	static let imagePath = "/t/p/w500/"
@@ -18,10 +19,12 @@ enum Constant {
 	static let path = "/3/movie/"
 	static let videoPath = "/videos"
 	static let similarPath = "/similar"
+	static let youtubePath = "/watch"
 	
 	static let apiKey = "API_KEY"
 	
 	static let homeTitle = "Movies"
+	static let youtube = "youtube"
 }
 
 enum CategoryPath: String, CaseIterable {
