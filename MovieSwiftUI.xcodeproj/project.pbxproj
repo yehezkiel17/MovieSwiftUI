@@ -19,6 +19,7 @@
 		6B327223252B891100060FFB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B327222252B891100060FFB /* HomeViewModel.swift */; };
 		6B327225252B8C9500060FFB /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B327224252B8C9500060FFB /* MovieView.swift */; };
 		6B327227252B8E9500060FFB /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B327226252B8E9500060FFB /* MovieViewModel.swift */; };
+		6B6D7F332531015700D511CB /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6D7F322531015700D511CB /* Cache.framework */; };
 		6B9CF24E252CDF3900967794 /* MovieVideoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9CF24D252CDF3900967794 /* MovieVideoResponse.swift */; };
 		6B9CF250252CE2F000967794 /* MovieVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9CF24F252CE2EF00967794 /* MovieVideo.swift */; };
 		6BAB08532522630D005EC751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB08522522630D005EC751 /* AppDelegate.swift */; };
@@ -68,6 +69,7 @@
 		6B327222252B891100060FFB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		6B327224252B8C9500060FFB /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		6B327226252B8E9500060FFB /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
+		6B6D7F322531015700D511CB /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = SOURCE_ROOT; };
 		6B9CF24D252CDF3900967794 /* MovieVideoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVideoResponse.swift; sourceTree = "<group>"; };
 		6B9CF24F252CE2EF00967794 /* MovieVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVideo.swift; sourceTree = "<group>"; };
 		6BAB084F2522630D005EC751 /* MovieSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B6D7F332531015700D511CB /* Cache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +146,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		6B6D7F312531013B00D511CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B6D7F322531015700D511CB /* Cache.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		6BAB08462522630C005EC751 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +161,7 @@
 				6BAB086825226312005EC751 /* MovieSwiftUITests */,
 				6BAB087325226312005EC751 /* MovieSwiftUIUITests */,
 				6BAB08502522630D005EC751 /* Products */,
+				6B6D7F312531013B00D511CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,6 +269,7 @@
 				6BAB084B2522630D005EC751 /* Sources */,
 				6BAB084C2522630D005EC751 /* Frameworks */,
 				6BAB084D2522630D005EC751 /* Resources */,
+				6B6D7F342531015D00D511CB /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -372,6 +385,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6B6D7F342531015D00D511CB /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Cache.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6BAB084B2522630D005EC751 /* Sources */ = {
@@ -570,6 +605,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = SBK2FUUPNT;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MovieSwiftUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -590,6 +629,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = SBK2FUUPNT;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MovieSwiftUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
