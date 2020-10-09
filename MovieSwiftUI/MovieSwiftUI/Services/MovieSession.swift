@@ -143,7 +143,7 @@ class MovieSession: MovieServices {
 		}
 		
 		urlSession.dataTask(with: url) { [weak self] (data, response, error) in
-			guard let self = self, error == nil else {
+			guard let _ = self, error == nil else {
 				errorCompletion?(error)
 				return
 			}

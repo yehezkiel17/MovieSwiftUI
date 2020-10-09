@@ -83,20 +83,6 @@ class MovieViewModel: ViewModel, ObservableObject {
 		return 9/16 * getImageWidth()
 	}
 	
-	func createPlayerViewModel() -> VideoViewModel {
-		let youtube = Constant.youtube
-		
-		videoResponse?.results.sort { result1, result2 in
-			result1.size > result2.size
-		}
-		
-		let trailer = videoResponse?.results.first(where: { video in
-			return video.site.lowercased() == youtube
-		})
-		
-		return VideoViewModel(key: trailer?.key ?? "")
-	}
-	
 	func createURL() {
 		let youtube = Constant.youtube
 		
