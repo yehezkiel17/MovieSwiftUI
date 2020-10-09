@@ -10,16 +10,20 @@ import SwiftUI
 import WebKit
 
 struct WebView: UIViewRepresentable {
-	var videoURL: URL
-	var frame: CGRect
+	
+	let viewModel: WebViewModel
+	
+	init(viewModel: WebViewModel) {
+		self.viewModel = viewModel
+	}
 	
 	func makeUIView(context: Context) -> WKWebView {
 		let config = WKWebViewConfiguration()
 		config.allowsInlineMediaPlayback = true
 		
-		let webView = WKWebView(frame: frame, configuration: config)
+		let webView = WKWebView(frame: viewModel.frame, configuration: config)
 		
-		let urlRequest = URLRequest(url: videoURL)
+		let urlRequest = URLRequest(url: viewModel.videoURL)
 		webView.load(urlRequest)
 		
 		return webView

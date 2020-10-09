@@ -65,10 +65,17 @@ struct MovieView: View {
 
 				if showingVideoPlayer && viewModel.url != nil {
 					WebView(
-						videoURL: viewModel.url ?? URL(fileURLWithPath: ""),
-						frame: CGRect(
-							x: 0, y: 0, width: viewModel.getImageWidth(), height: viewModel.getImageHeight()
-					))
+						viewModel: WebViewModel(
+							videoURL: viewModel.url ?? URL(fileURLWithPath: ""),
+							frame: CGRect(
+								origin: .zero,
+								size: CGSize(
+									width: viewModel.getImageWidth(),
+									height: viewModel.getImageHeight()
+								)
+							)
+						)
+					)
 				}
 			}
 		}
