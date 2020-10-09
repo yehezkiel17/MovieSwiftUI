@@ -15,6 +15,8 @@ struct MovieView: View {
 	
 	@State var showingVideoPlayer = false
 	
+	@Environment(\.verticalSizeClass) var sizeClass
+	
 	var image: UIImage? {
 		guard let image = viewModel.image else {
 			return nil
@@ -62,7 +64,11 @@ struct MovieView: View {
 				}
 
 				if showingVideoPlayer && viewModel.url != nil {
-					VideoView(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4")!, previewLength: 15)
+					WebView(
+						videoURL: viewModel.url ?? URL(fileURLWithPath: ""),
+						frame: CGRect(
+							x: 0, y: 0, width: viewModel.getImageWidth(), height: viewModel.getImageHeight()
+					))
 				}
 			}
 		}
