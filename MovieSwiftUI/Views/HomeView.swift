@@ -33,6 +33,7 @@ struct HomeView: View {
 			}
 			.navigationBarTitle(Constant.homeTitle)
 		}
+		.navigationViewStyle(StackNavigationViewStyle())
 		.onAppear(perform: {
 			UITableView.appearance().separatorStyle = .none
 		})
