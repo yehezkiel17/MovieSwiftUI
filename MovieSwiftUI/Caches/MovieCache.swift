@@ -24,11 +24,11 @@ class MovieCache {
 	
 	static let shared = MovieCache()
 	
-	private let storage: Storage<[Movie]>?
+	private let storage: Storage<Key, Value>?
 	private let storageName = Constant.movieStorage
 	
 	private init() {
-		storage = try? Storage(
+		storage = try? Storage<Key, Value>(
 			diskConfig: DiskConfig(name: storageName),
 			memoryConfig: MemoryConfig(expiry: .never, countLimit: 1000, totalCostLimit: 100),
 			transformer: TransformerFactory.forCodable(ofType: [Movie].self)
