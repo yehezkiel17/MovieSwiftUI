@@ -25,6 +25,9 @@ enum Constant {
 	
 	static let homeTitle = "Movies"
 	static let youtube = "youtube"
+	
+	static let imageStorage = "Image Storage"
+	static let movieStorage = "Movie Storage"
 }
 
 enum CategoryPath: String, CaseIterable {
