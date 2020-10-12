@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cache
 
 class MovieCache {
 	
@@ -18,40 +19,37 @@ class MovieCache {
 		case popular = "popular"
 		case topRated = "top-rated"
 		case upcoming = "upcoming"
+		case similar = "similar-"
 	}
 	
 	static let shared = MovieCache()
 	
-	private let userDefaults = UserDefaults.standard
+	private let storage: Storage<[Movie]>?
+	private let storageName = Constant.movieStorage
 	
-	private init() {}
+	private init() {
+		storage = try? Storage(
+			diskConfig: DiskConfig(name: storageName),
+			memoryConfig: MemoryConfig(expiry: .never, countLimit: 1000, totalCostLimit: 100),
+			transformer: TransformerFactory.forCodable(ofType: [Movie].self)
+		)
+	}
 }
 
 extension MovieCache: Cache {
 	func save(value: Value, key: Key) {
-		if let movies = try? JSONEncoder().encode(value) {
-			userDefaults.set(movies, forKey: key)
-		}
+		try? storage?.setObject(value, forKey: key)
 	}
 	
 	func load(key: Key) -> Value? {
-		var movies: [Movie]?
-		let decoder = JSONDecoder.tmdbJsonDecoder
-		
-		guard let data = userDefaults.data(forKey: key) else {
-			return movies
+		guard let storage = storage else {
+			return nil
 		}
 		
-		do {
-			movies = try decoder.decode([Movie].self, from: data)
-		} catch {
-			print(error.localizedDescription)
-		}
-		
-		return movies
+		return try? storage.object(forKey: key)
 	}
 	
 	func remove(key: Key) {
-		userDefaults.removeObject(forKey: key)
+		try? storage?.removeObject(forKey: key)
 	}
 }

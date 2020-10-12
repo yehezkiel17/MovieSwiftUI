@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Cache
 
 class ImageCache {
 	
@@ -16,32 +17,32 @@ class ImageCache {
 	
 	static let shared = ImageCache()
 	
-	private let userDefaults = UserDefaults.standard
+	private let storage: Storage<UIImage>?
+	private let storageName = Constant.imageStorage
 	
-	private init() {}
+	private init() {
+		storage = try? Storage(
+			diskConfig: DiskConfig(name: storageName),
+			memoryConfig: MemoryConfig(expiry: .never, countLimit: 1000, totalCostLimit: 100),
+			transformer: TransformerFactory.forImage()
+		)
+	}
 }
 
 extension ImageCache: Cache {
 	func save(value: Value, key: Key) {
-		
-		DispatchQueue.global().async { [weak self] in
-			let encodedString = value.pngData()?.base64EncodedString()
-			self?.userDefaults.set(encodedString, forKey: key)
-		}
+		try? storage?.setObject(value, forKey: key)
 	}
 	
 	func load(key: Key) -> Value? {
-		guard let object = userDefaults.object(forKey: key) as? String,
-			let data = Data(base64Encoded: object) else {
+		guard let storage = storage else {
 			return nil
 		}
 		
-		let image = UIImage(data: data)
-		
-		return image
+		return try? storage.object(forKey: key)
 	}
 	
 	func remove(key: Key) {
-		userDefaults.removeObject(forKey: key)
+		try? storage?.removeObject(forKey: key)
 	}
 }

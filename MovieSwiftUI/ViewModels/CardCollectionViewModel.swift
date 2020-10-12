@@ -14,6 +14,7 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 	let title: SectionTitle
 	let cardOrientationType: CardOrientationType
 	let movieSession = MovieSession.shared
+	let movieCache = MovieCache.shared
 	
 	@Published var movies: [Movie] = [Movie.dummyMovie]
 	
@@ -23,7 +24,34 @@ class CardCollectionViewModel: ViewModel, ObservableObject {
 		self.title = title
 		self.cardOrientationType = cardOrientationType
 		
+		getMovie(id: movieId)
 		requestMovie(id: movieId)
+	}
+	
+	func getMovie(id: String? = nil) {
+		var key: String
+		
+		switch title {
+		case .nowPlaying:
+			key = MovieCache.MovieKey.nowPlaying.rawValue
+		case .popular:
+			key = MovieCache.MovieKey.popular.rawValue
+		case .topRated:
+			key = MovieCache.MovieKey.topRated.rawValue
+		case .upcoming:
+			key = MovieCache.MovieKey.upcoming.rawValue
+		case .similar:
+			key = (MovieCache.MovieKey.similar.rawValue + (id ?? "0"))
+		}
+		
+		guard let movies = movieCache.load(key: key) else {
+			requestMovie()
+			return
+		}
+		
+		DispatchQueue.main.async { [weak self] in
+			self?.movies = movies
+		}
 	}
 	
 	func requestMovie(id: String? = nil) {
