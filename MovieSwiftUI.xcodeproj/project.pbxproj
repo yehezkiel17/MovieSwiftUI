@@ -60,6 +60,8 @@
 		6BB1C61C255C58F600730F26 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB088F25250910005EC751 /* Movie.swift */; };
 		6BB1C61D255C58F600730F26 /* MovieVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9CF24F252CE2EF00967794 /* MovieVideo.swift */; };
 		6BB1C61E255C58F600730F26 /* CardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B327215252A477700060FFB /* CardCollectionView.swift */; };
+		6BB1C629255C5A6F00730F26 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6D7F322531015700D511CB /* Cache.framework */; };
+		6BB1C62A255C5A6F00730F26 /* Cache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6D7F322531015700D511CB /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6BBA8CA62527AC9700CE40DD /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA8CA52527AC9700CE40DD /* Cache.swift */; };
 		6BBA8CA82527ACD400CE40DD /* MovieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA8CA72527ACD400CE40DD /* MovieCache.swift */; };
 		6BC46EF625265148007C8B3A /* MovieSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC46EF525265148007C8B3A /* MovieSession.swift */; };
@@ -100,6 +102,17 @@
 				6BB1C5FF255C538D00730F26 /* MovieSwiftUIClips.app in Embed App Clips */,
 			);
 			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB1C62B255C5A6F00730F26 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6BB1C62A255C5A6F00730F26 /* Cache.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -177,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BB1C629255C5A6F00730F26 /* Cache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +432,8 @@
 				6BB1C5EC255C538A00730F26 /* Sources */,
 				6BB1C5ED255C538A00730F26 /* Frameworks */,
 				6BB1C5EE255C538A00730F26 /* Resources */,
+				6BB1C624255C5A2D00730F26 /* Carthage */,
+				6BB1C62B255C5A6F00730F26 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -513,6 +529,25 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		6B6D7F342531015D00D511CB /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Cache.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+		6BB1C624255C5A2D00730F26 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -906,6 +941,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieSwiftUIClips/Preview Content\"";
 				DEVELOPMENT_TEAM = 599SL32HL9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MovieSwiftUIClips/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -932,6 +971,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieSwiftUIClips/Preview Content\"";
 				DEVELOPMENT_TEAM = 599SL32HL9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MovieSwiftUIClips/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
