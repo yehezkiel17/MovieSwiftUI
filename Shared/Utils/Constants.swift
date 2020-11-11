@@ -21,7 +21,7 @@ enum Constant {
 	static let similarPath = "/similar"
 	static let youtubePath = "/watch"
 	
-	static let apiKey = "API_KEY"
+	static let apiKey = "0b066c8086a078ea48b18b7413b1041e"
 	
 	static let homeTitle = "Movies"
 	static let youtube = "youtube"
